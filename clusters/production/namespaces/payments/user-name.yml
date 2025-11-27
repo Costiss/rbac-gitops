@@ -1,0 +1,24 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: "user.name"
+rules:
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["get", "list", "watch", "create", "update", "patch"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "watch", "patch"] # No delete
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: "user.name"
+subjects:
+  - kind: User
+    name: user.name@company.com
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: "user.name"
+  apiGroup: rbac.authorization.k8s.io

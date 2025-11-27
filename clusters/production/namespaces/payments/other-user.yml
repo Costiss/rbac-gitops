@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: "other.user"
+subjects:
+  - kind: User
+    name: other.user@company.com
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: viewer-roleset
+  apiGroup: rbac.authorization.k8s.io
